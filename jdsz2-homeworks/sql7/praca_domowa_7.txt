@@ -1,0 +1,45 @@
+
+
+#####-------------- SQL -------------------------
+
+Nale¿y wczytaæ plik xpdusd_d.csv zawieraj¹cy notowania palladium od 2016 roku.
+
+- nale¿y wyliczyæ œrednie ceny zamkniêcia w agregacji miesiêcznej, ponadto wyliczyæ z tych cen wartoœci MoM.
+- Wygenerowaæ daty od 2016 roku do koñca 2019 w interwa³ach miesiêcnych.
+- dla miesiêcy dla których nie mamy danych bêdziemy wyliczali predykcjê œrednich cen miesiêczych:
+
+nale¿y wyliczyæ œredni¹ wartoœæ MoM - bêdziê to nasz wspó³czynniki trendu, czyli wartoœæ procentowa o jak¹ œrednio zmienia siê cena w stosunku do poprzedniego miesi¹ca.
+Wartoœæ ceny dla kolejnych miesiêcy bêdzie zmieniaæ siê zgodnie z wspó³czynnikiem trendu.
+Przyk³¹d:
+1000 = cena z ostatniego miesi¹ca
+0.1 = wspo³czynnik trendu
+
+1 cena predykowana = 1000 + 1000 * 0.1 
+2 cena predykowan =  1 cena predykowana + 1 cena predykowana * 0.1
+itd...
+
+##------- wskazówka -------
+£¹czenie tabel nale¿y zrobiæ podobnie jak na zajêciach  ( Zadanie 6, slajd 35 ) 
+Pomocny mo¿e byæ wzór na procent sk³adany: https://pl.wikipedia.org/wiki/Procent_sk%C5%82adany (wzór taki jak na kapitalizacjê roczn¹) 
+
+###------------------ TABLEU ---------------------------------------------
+
+Wczytaæ zbiór danych dotycz¹cych demogorafi w USA Ÿród³o i opis : https://www.kaggle.com/muonneutrino/us-census-demographic-data#acs2015_county_data.csv
+Stworzyæ dashboard przedstawiaj¹cy kilka wybranych przez siebie danych demograficznych - tutaj du¿a dowolnoœæ i inwencaj w³asna.
+W ujêciu stanów lub hrabstw - mo¿liwoœæ zmiany granulacji mile widzina :)
+
+Wymagania konieczne:
+
+- mapa powierzchniowa, nie punktowa.
+- oprócz maby przynajmniej dwa inne wykresy ró¿nych rodzajów.
+- utworzenie przynajmniej 1 grupy na bazie parametrów np. dot. bezrobocia: wysokie/œrednie/niskie bezrobocie, czy demografi: wiekszoœæ rdzennych mieszkañców, przewaga bia³ych i latynosów itp
+- mo¿liwoœæ u¿ywania wybranych filtrów - przynajmniej jeden wymiar kategoryczny (lista) i jeden filtr przy u¿yciu miary numerycznej (suwak) 
+- utworzenie parametru i mo¿liwoœci jego zmiany
+- dodatkowe informacje, miary w tooltipie
+- wykorzystanie wykresu z innego arkusza np. filtrowanie innym wykresem (jak na zajêciach przyk³ad z kobietami i mê¿czyznami) lub widok wykresu w tooltipie
+
+Najciekawsze wizualizacje zaprezentujemy na zajêciach :)
+
+
+
+

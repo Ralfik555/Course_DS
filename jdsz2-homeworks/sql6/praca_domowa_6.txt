@@ -1,0 +1,56 @@
+
+####---- SQL --------------------------
+
+Nale¿y wczytaæ plik athlete_events.csv, zawieraj¹cy zawodników startuj¹cych w igrzyskach olimpijskich. (Ÿród³o: kaggle.com)
+
+W wielu przykadkach brakuje informacji o wzroœcie i wadze zawodników, dane te bêdzie trzeba uzupe³niæ.
+Dane te nale¿y uzule³niæ wartoœci¹ mediany wagi lub wzrostu zawodników tej samej p³ci, konkurencji sportowej (pole sport) i roku igrzysk.
+Je¿eli w danym przeciêciu p³eæ-sport-rok jest mniej ni¿ po³owa zawodników z kompletnymi danymi wzrostu i wagi, 
+wtedy nale¿y z naszego zbioru usun¹æ wszystkich zawodników tego przeciêcia.
+Tak samo nalezy usun¹æ takie przeciêcia, w których jest mniej ni¿ 10 zawodników z kompletnymi danymi.
+
+
+Dla tak oczyszczonego zboiru nalezy jeszcze dodaæ pole bmi wyliczone wg wzoru: waga [kg]/ wzrost [m] ^2.
+Taki zbiór danych nale¿y wyeksportowaæ do pliku csv - w drugiej czêœci zadania bêdziemy go wczytywaæ w Tableu.
+
+Ponadto nale¿ly wyliczyæ œrednie bmi w przeciêciach p³eæ-sport-rok. 
+Nastêpnie utworzyæ zapytanie w którym orzymamy sporty dla kobiet oraz mê¿czyzn, które charakteryzuj¹ siê najwiêksz¹ zmiennoœci¹ na przestrzeni lat.
+Czyli takie, które maj¹ najwiêksze odchylenie standardowe z œrednich rocznych wartoœci - te dyscypliny bêdziemy analizowaæ w Table.
+
+####------ Tableu --------------------
+
+W Tableu nale¿y utworzyæ wymiary:
+sport_group_m - podzia³ na sport o najwiêkszym odchylenniu u mê¿czyzn oraz pozosta³e 
+sport_group_f - podzia³ na sport o najwiêkszym odchylenniu u kobiet oraz pozosta³e 
+
+Wymiary mozna utworzyæ np w nastepuj¹cy sposób:
+1) "Create calculated field..." klikaj¹c prawym przyciskiem w poni¿ej wyœwietlonych miar w oknie measures.
+2) Utworzon¹ w ten sposób miarê zaminiæ na wymiar "Convert do Dimension"
+
+Sporz¹dziæ wykres liniowy przedstawiaj¹cy œrednie BMI w kolejnych igrzyskach z liniami wg wymiaru sport_group_m.
+Wykres liniony ma siê rozpoczynaæ w roku gdzie pierwszy raz pojawi³a siê dyscyplina z sport_group_m. 
+Wartoœci œrednich bmi pokazywaæ tylko dla mê¿czyzn oraz sportów z sezonu odpowiadaj¹cemu wyró¿nionemu sporowi (letnie, zimowe IO).
+Dodatkowo sporz¹dziæ wykres kolumnowy œrednich BIM po dyscyplinach (pole sport) z ostatnich igrzysk i wyro¿niæ analizowany sport innym kolorem (najlepiej takim samym jaki na wykresie liniowym)
+Na dashboardzie umieœci oba wykresy obok siebie, pamiêtaj¹c o tytu³ach wykresów oraz podpisach osi w jêzyku angielskim by by³y spójne z angielskimi nazwami dyscyplin.
+
+Analogicznie wykresy zrobiæ dla kobiet. Na dashboardzie umieœciæ poni¿ej wykresow mê¿czyzn.
+Wizualizacjê zapisaæ na serwerze i link umieœciæ w pliku tekstowym wraz z zapytaniami sql.
+
+
+###-------- porady i uwagi ----------------
+Przed eksportem do csv w Pycharm warto wejœæ w "configure csv formats" i tam zaznaczyæ "First row is header" aby zapisa³y siê nazwy kolum.
+Plik zapiszê siê w csv z kropk¹ jako separatorem dziesiêtnym. Przed wczytaniem do Tableu najwygodniej jest otworzyæ plik Excela, tam wybraæ dane -> Z tekstu.
+Tam w 3 kroku zznaczyæ kolumnê z bmi i ustawiæ jako tekst - w przeciwnym wypadku mo¿e niektór liczby wczytaæ jako daty i Tableu tego siê nie odkrêci.
+Nastepnie zaznaczyæ w Excelu kolumnê z bmi i u¿yæ zamiany znaków - z kropki na przecinek. Tak zapisany arkusz wczytaæ do Tableu.
+
+Uwaga!!
+Proszê nie umieszczaæ ca³ego pliku csv na githubie bo bêdzie zajmowa³ sporo miejsca !!!
+
+
+
+
+
+
+
+
+
