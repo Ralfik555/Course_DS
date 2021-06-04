@@ -1,0 +1,14 @@
+Podobie jak w poprzedniej pracy domowej utwórz w tym katalogu (sql3) imienny folder, w którym bêdzie odpowiedŸ
+
+1) Za pomoc¹ jednego zapytania (bez podzapytañ unionów itp ) stwórz spis wszystkich wniosków
+zawieraj¹cy id_wniosku i status_dokmentów wg nastêpuj¹cej definicji:
+'brak_dokumentu' dla wniosków, których nie mamy ¿adnego dokumentu pasa¿era w bazie
+'bez_paszportu' dla wniosków, gdzie ¿aden z dokumentów nie by³ paszportem
+'tylko_bilety' dla wniosków, którch dokumenty stanowi³y wy³aczenie skany biletu
+'standard' dla pozosta³ych
+
+
+2) Za pomoc¹ jednego zapytania (u¿ywaj¹c sk³adni EXCEPT) wylistuj wnioski,
+dla których czas wyslania wszystkich dokumnetów nie przekroczy³ 10 minut, 
+(oczywiœnie nie bie¿emy pod uwagê takich, gdzie jest tylko jeden dokument) 
+i jednoczeœnie ich przewoŸnikiem nie by³ TLK

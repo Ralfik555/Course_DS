@@ -1,0 +1,35 @@
+
+with wn_rek as
+(select distinct
+w.id,
+w.powod_operatora,
+w.kwota_rekompensaty,
+w.zrodlo_polecenia,
+s.konto,
+w.data_utworzenia
+from
+wnioski w
+join rekompensaty r on w.id = r.id_wniosku
+join szczegoly_rekompensat s on r.id = s.id_rekompensaty),
+
+podobne as
+(select * from (select w1.id,
+                       w1.konto,
+                       w1.kwota_rekompensaty,
+                       w2.id id_wniosek_podobny,
+                       w2.zrodlo_polecenia zrodo_podobnego,
+                       rank()over (partition by w1.id order by abs(w1.kwota_rekompensaty - w2.kwota_rekompensaty), (
+                         w1.data_utworzenia - w2.data_utworzenia), w2.id) rk
+                from wn_rek w1
+                        join wn_rek w2 on w1.konto = w2.konto
+                                                and w1.powod_operatora = w2.powod_operatora
+                                                and w2.zrodlo_polecenia is not null
+                                                and w1.zrodlo_polecenia is null
+                  and w1.data_utworzenia > w2.data_utworzenia) k
+where rk =1)
+
+select zrodo_podobnego, count(*) lp,
+    avg(kwota_rekompensaty)
+from
+podobne
+group by zrodo_podobnego

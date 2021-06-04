@@ -1,0 +1,6 @@
+
+Zadanie:
+Rozpatrywaæ bêdzimy wnioski od roku 2016, których kwota rekompensaty jest ni¿sza, ni¿ œrednia kwota dla danego powodu operatora.
+Dla ka¿dego roku wybraæ lotnisko przylotu, które w danym roku ma najwiêcej takich wniosków.
+Ponadto wyliczyæ jakie jest prawdopodobieñstwo tego, ¿e spoœród 3 losowo wybranych takich wnioksów z danego roku, 2 bêd¹ w³aœnie z tego lotniska.
+Uwaga!! nale¿y wykluczyæ wnioski, dla których identyfikator podró¿y jest niepoprawny i zawiera "----"

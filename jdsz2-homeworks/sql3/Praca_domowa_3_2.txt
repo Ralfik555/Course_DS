@@ -1,0 +1,10 @@
+1) zrobiæ zestawienie w którym wylistuemy wszytkie wnoski wraz z informacj¹ o kraju, op³at¹ za us³ugê
+ wyra¿on¹ kwotowo (nie procentowo) i informacj¹ jaki % œredniej op³aty w danym kraju ta op³ata stanowi
+
+2) dla odrzuconych wniosków dla których mamy dokumenty w bazie, zrobiæ zestawienie id dokumentu, 
+id_wniosku data otrzymania oraz ró¿nica czasu od otrzymania pierwszego dokumentu w ramach danego wniosku
+(pierwszy otrzymany dokument oczywœcie bêdzie mia³ ró¿nicê 0)
+
+3) Dla wniosków z polski zrobiæ zestawienie wniosków, stanu_wniosku, kwoty rekompensaty oraz informacjê 
+czy ta kwota mieœcie siê w 95% przedziale ufnoœci kwot rekompensaty dla danego stanu wniosku
+(zak³adamy ¿e 95% przedzia³ ufnoœci to przedzia³ (avg - 2SD, avg + 2SD)

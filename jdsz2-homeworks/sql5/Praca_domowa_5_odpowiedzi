@@ -1,0 +1,52 @@
+
+
+###--------- 5.1
+
+With grupy_kamp as(
+select id, rok, count(*) grupa_kampanii
+  from
+  (Select l.id, typ_kampanii,date_part('year', data_kampanii) rok
+  from m_lead l
+  join m_lead_kampania lk on l.id = lk.id_lead
+  join m_kampanie k on lk.id_kampania = k.id
+  where data_kampanii <= current_date
+  group by l.id, typ_kampanii,date_part('year', data_kampanii)
+  )g
+group by id, rok
+)
+
+select *, (udial_rok - lag(udial_rok)over(partition by grupa_kampanii))/lag(udial_rok)over(partition by grupa_kampanii) yoy
+from
+(select distinct rok, grupa_kampanii, count(*)over(partition by rok, grupa_kampanii)::numeric /count(*)over(partition by rok)::numeric udial_rok
+from grupy_kamp
+order by rok, grupa_kampanii) u
+order by grupa_kampanii
+
+
+###--------- 5.2
+
+with wnioski_w as
+(select * from
+(Select w.id,date_part('year',w.data_utworzenia) rok , kod_przyjazdu ,kwota_rekompensaty,
+avg(kwota_rekompensaty) over (partition by powod_operatora) as avg
+from
+  wnioski w
+  left join podroze p on w.id = p.id_wniosku
+  left join szczegoly_podrozy s on p.id = s.id_podrozy
+  where date_part('year',w.data_utworzenia) >= 2016 and identyfikator_podrozy not like '%----%'
+  )w
+where kwota_rekompensaty < avg)
+
+
+select
+rok, kod_przyjazdu,lp, lp_rok, chance,
+chance^2 * (1-chance)^1 * ((3!)/(2!)) pr
+from
+  (select * , rank()over(partition by rok order by chance desc) rk
+  from
+    (select distinct rok, kod_przyjazdu ,
+    count(*)over(partition by rok, kod_przyjazdu)::numeric /count(*)over(partition by rok)::numeric chance,
+                     count(*)over(partition by rok, kod_przyjazdu) lp,count(*)over(partition by rok) lp_rok
+    from wnioski_w)c
+  ) r
+where rk =1

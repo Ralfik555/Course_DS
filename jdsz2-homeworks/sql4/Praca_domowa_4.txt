@@ -1,0 +1,14 @@
+
+-----------------------------------------------------------------------------
+Dla ka¿dego wnisku dla, którego nast¹pi³a rekompensata ale nie by³o informacji o Ÿródle polecnia
+przyporz¹dkuj dok³adnie 1 wniosek podobny, który:
+	- jest z tego samego rodzaju konta (tabela szczegoly_rekompensat)  oraz jest wyp³acony z tego samego powodu
+	- ma informacjê o Ÿródle polecenia i zosta³ utworzony wczeœniej ni¿ porównywany wniosek.
+	- ma kwotê rekompensaty identyczn¹, b¹dŸ mo¿liwie jak najbardziej podobn¹, 
+		w przypadku równych kwot kilku wniosków podobnych, wybraæ ten, który zosta³ z³o¿ony w najmniejszym odstepnie czasowym od porównywanego wniosku
+ 
+Wylistowaæ id wniosku i jego kwotê rekompensaty, id wniosku podobnego oraz Ÿród³o wniosku podeobnego
+Ponadto z powy¿szego zestawienia zrobiæ podsumowanie z liczb¹ i œredni¹ kwot¹ wniosków ze wzglêdu na Ÿród³o wniosku podobnego.
+
+Uwaga !
+Dla czêœci wniosków nie znajdziemy ¿adngo wniosku podobnego spe³niaj¹cego powy¿sze wymagania.

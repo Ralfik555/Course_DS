@@ -1,0 +1,72 @@
+
+-- 3.1
+
+select status_dokumentow, count(*)
+from
+(
+select w.id,
+case when
+count(p.id) =  0 then 'brak_dokumentu'
+when avg(case when p.typ_dokumentu in ('skan biletu') then 1 else 0 end ) = 1 then 'tylko_bilety'
+when sum(case when p.typ_dokumentu = 'paszport' then 1 else 0 end ) = 0 then 'bez_paszportu'
+else 'standard' end status_dokumentow
+from
+wnioski w
+left join dokumenty p on p.id_wniosku = w.id
+group by w.id
+) k
+group by status_dokumentow
+
+--3.2
+
+select
+w.id
+from
+wnioski w
+join dokumenty p on p.id_wniosku = w.id
+group by w.id
+having count(p.id) > 1 and max(p.data_wyslania) - min(p.data_wyslania) < '10 minute'::interval
+except
+select
+w.id
+from
+wnioski w
+join podroze p on p.id_wniosku = w.id
+join szczegoly_podrozy s on s.id_podrozy = p.id and s.identyfikator_operatora = 'TLK'
+
+
+
+---------------------------------------------------------------------------
+---3.3
+
+select
+id,
+kod_kraju,
+(oplata_za_usluge_procent/100::numeric)* kwota_rekompensaty  oplata,
+(oplata_za_usluge_procent/100::numeric)* kwota_rekompensaty / avg((oplata_za_usluge_procent/100::numeric)* kwota_rekompensaty)over(partition by kod_kraju) proc_kraj
+from wnioski
+
+--3.4
+
+select d.id,
+id_wniosku,
+data_otrzymania,
+data_otrzymania -
+first_value(data_otrzymania)over(partition by id_wniosku order by data_otrzymania) rozniaca_otrzymania
+from dokumenty d
+join wnioski w on w.id = d.id_wniosku
+where stan_wniosku like '%odrzucony%'
+order by id_wniosku, data_otrzymania
+
+---3.5
+
+select id,
+stan_wniosku,
+kwota_rekompensaty,
+case when kwota_rekompensaty >
+avg(kwota_rekompensaty)over(partition by stan_wniosku) - 2 * stddev_pop(kwota_rekompensaty)over(partition by stan_wniosku)
+and kwota_rekompensaty < avg(kwota_rekompensaty)over(partition by stan_wniosku) + 2 * stddev_pop(kwota_rekompensaty)over(partition by stan_wniosku)
+    then TRUE  else False end czy_ci
+from wnioski
+where kod_kraju = 'PL'
+
